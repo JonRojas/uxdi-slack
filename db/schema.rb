@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511195440) do
+ActiveRecord::Schema.define(version: 20150511222344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "instances", force: :cascade do |t|
     t.string   "uxdi_name"
-    t.date     "start_date"
+    t.string   "start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,13 +27,21 @@ ActiveRecord::Schema.define(version: 20150511195440) do
     t.string   "channel"
     t.text     "url"
     t.text     "description"
-    t.integer  "week"
+    t.integer  "week_id"
     t.string   "tag"
     t.string   "category"
-    t.datetime "occurrence"
+    t.string   "occurrence"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "posts_weeks", id: false, force: :cascade do |t|
+    t.integer "week_id"
+    t.integer "post_id"
+  end
+
+  add_index "posts_weeks", ["post_id"], name: "index_posts_weeks_on_post_id", using: :btree
+  add_index "posts_weeks", ["week_id"], name: "index_posts_weeks_on_week_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -55,9 +63,10 @@ ActiveRecord::Schema.define(version: 20150511195440) do
 
   create_table "weeks", force: :cascade do |t|
     t.integer  "num"
-    t.datetime "start_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "start_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "instance_id"
   end
 
 end
