@@ -1,0 +1,5 @@
+<ul>
+	<% @instances.each do |instance| %>
+	<li><%= link_to instance.uxdi_name, instance_path(instance) %></li>
+	<% end %>
+</ul>
