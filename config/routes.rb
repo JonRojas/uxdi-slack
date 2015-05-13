@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root 'instances#index'
   resources :instances
   resources :weeks
+  resources :posts
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

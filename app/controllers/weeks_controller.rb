@@ -6,6 +6,7 @@ end
 
 def show
 	@week = Instance.first.weeks
+	@post = Instance.first.weeks.first.posts
 end
 
 def create
